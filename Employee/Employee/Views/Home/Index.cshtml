@@ -1,0 +1,65 @@
+﻿@model Employee.Models.EmployeeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    int srno = 1;
+}
+<style>
+    .validationerror{
+        color:red;
+        font-size:12px;
+        float:left;
+        margin-bottom:20px;
+    }
+</style>
+
+<div class="Container">
+    <div class="row">
+    <div class="col-md-6">
+        
+<form method="post" action="~/Home/Index">
+    <div class="text-center">
+        <h6 class="display-6">Add User</h6>
+        <div class="mb-3">
+      <input type="text" class="form-control" asp-for="FirstName" required  placeholder="Enter FirstName"/>
+      <span asp-validation-for="FirstName" class="validationerror" ></span>
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" id="LastName" name="LastName" required  placeholder="Enter LastName"/>
+       <span asp-validation-for="LastName" class="validationerror" ></span>
+    </div>
+    <div>
+        <button style="margin-top:10px;" type="submit" class="btn btn-primary text-left">Submit</button>
+    </div>
+    </div>
+</form>
+<p style="text-align:center;font-weight:bold;margin-top:20px">
+    @TempData["EmpStatus"]
+</p>
+</div>
+
+<div class="col-md-6">
+      <h6 class="display-6">Add User</h6>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">FirstName</th>
+      <th scope="col">LastName</th>
+    </tr>
+  </thead>
+  <tbody>
+      @if(Model.EmployeeList!=null){
+      @foreach (var item in Model.EmployeeList)
+      {
+        <tr>
+          <th scope="row">@(srno++)</th>
+          <td>@item.FirstName</td>
+          <td>@item.LastName</td>
+        </tr>  
+       }
+      }
+  </tbody>
+</table>
+</div>
+</div>
+</div>
